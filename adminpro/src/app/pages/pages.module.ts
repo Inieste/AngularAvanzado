@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
+import {FormsModule} from '@angular/forms';
 
 import {SharedModule} from '../shared/shared.module';
 import {PAGES_ROUTES} from './pages.routes';
@@ -9,9 +10,9 @@ import {PagesComponent} from './pages.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {ProgressComponent} from './progress/progress.component';
 import {Graficas1Component} from './graficas1/graficas1.component';
-import {FormsModule} from '@angular/forms';
 import {IncrementadorComponent} from '../components/incrementador/incrementador.component';
 import {GraficoDonaComponent} from '../components/graficoDona/grafico-dona.component';
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {GraficoDonaComponent} from '../components/graficoDona/grafico-dona.compo
     ProgressComponent,
     Graficas1Component,
     IncrementadorComponent,
-    GraficoDonaComponent
+    GraficoDonaComponent,
+    AccountSettingsComponent
   ],
   exports: [
     PagesComponent,
