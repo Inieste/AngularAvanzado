@@ -10,7 +10,6 @@ export class SidebarComponent implements OnInit {
 
   constructor(private sidebar: SidebarService) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
 }
