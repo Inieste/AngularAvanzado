@@ -8,11 +8,16 @@ var app = express();
 var Usuario = require('../models/usuario');
 
 // ==============================================
-// Obtener todos los usuarios
+//      Obtener todos los usuarios
 // ==============================================
 app.get('/', (req, res, next) => {
 
+    var desde = req.query.desde || 0;
+    desde = Number(desde);
+
     Usuario.find({}, 'nombre email imagen role')
+        .skip(desde)
+        .limit(5)
         .exec(
             (error, usuarios) => {
                 if (error) {
@@ -23,16 +28,19 @@ app.get('/', (req, res, next) => {
                     });
                 }
 
-                res.status(200).json({
-                    ok: true,
-                    usuarios: usuarios
-                });
+                Usuario.count({}, (error, count) => {
+                    res.status(200).json({
+                        ok: true,
+                        usuarios: usuarios,
+                        total: count
+                    });
+                })
             }
          );
 });
 
 // ==============================================
-// Actualizar usuario
+//      Actualizar usuario
 // ==============================================
 app.put('/:id',  mdAutenticacion.verificaToken, (req, res) => {
     var id = req.params.id;
@@ -79,7 +87,7 @@ app.put('/:id',  mdAutenticacion.verificaToken, (req, res) => {
 });
 
 // ==============================================
-// Crear un nuevo usuario
+//      Crear un nuevo usuario
 // ==============================================
 app.post('/', mdAutenticacion.verificaToken, (req, res) => {
     var body = req.body;
